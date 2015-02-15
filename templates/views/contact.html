@@ -2,14 +2,14 @@
 
 {% block intro %}
 	<div class="container">
-		<h1>Contact Us</h1>
+		<h1>Contactez-nous</h1>
 	</div>
 {% endblock %}
 
 {% block content %}
 	<div class="container">
 		{% if enquirySubmitted %}
-			<h3>Thanks for getting in touch.</h3>
+			<h3>Merci de votre message, nous vous répondrons dès que possible.</h3>
 		{% else %}
 			<div class="row">
 				<div class="col-sm-8 col-md-6">
@@ -18,29 +18,29 @@
 						{% set class = ( "has-error" if validationErrors.name else "" ) %}
 						<div class="form-group {{ class }}">
 							<label>
-								<span>Name</span>
+								<span>Nom</span>
 								<input type="text" name="name.full" value="{{ formData["name.full"] }}" class="form-control">
 							</label>
 						</div>
 						{% set class = ( "has-error" if validationErrors.email else "" ) %}
 						<div class="form-group {{ class }}">
 							<label>
-								<span>Email</span>
+								<span>E-mail</span>
 								<input type="email" name="email" value="{{ formData.email }}" class="form-control">
 							</label>
 						</div>
 						<div class="form-group">
 							<label>
-								<span>Phone</span>
-								<input type="text" name="phone" value="{{ formData.phone }}" placeholder="(optional)" class="form-control">
+								<span>Téléphone</span>
+								<input type="text" name="phone" value="{{ formData.phone }}" placeholder="(optionnel)" class="form-control">
 							</label>
 						</div>
 						{% set class = ( "has-error" if validationErrors.enquiryType else "" ) %}
 						<div class="form-group {{ class }}">
 							<label>
-								<span>What are you contacting us about?</span>
+								<span>A quel sujet souhaitez-vous nous contacter ?</span>
 								<select name="enquiryType" class="form-control">
-									<option value="">(select one)</option>
+									<option value="">(choisir)</option>
 									{% for type in enquiryTypes %}
 										{% set selected = ( 'selected="selected"' if formData.enquiryType == type.value else "" ) %}
 										<option value="{{type.value}}" {{ selected }}>{{ type.label }}</option>
@@ -51,11 +51,11 @@
 						<div class="form-group {{ class }}">
 							<label>
 								<span>Message</span>
-								<textarea name="message" placeholder="Leave us a message..." rows="4" class="form-control">{{ formData.message }}</textarea>
+								<textarea name="message" placeholder="Ecrivez votre message..." rows="4" class="form-control">{{ formData.message }}</textarea>
 							</label>
 						</div>
 						<div class="form-actions">
-							<button type="submit" class="btn btn-primary">Send</button>
+							<button type="submit" class="btn btn-primary">Envoyer</button>
 						</div>
 					</form>
 				</div>

@@ -5,15 +5,15 @@
 	<h2>
 		<a href="/{{ post.slug }}">{{ post.title }}</a>
 	</h2>
-	<p class="lead text-muted">Posted
+	<p class="lead text-muted">Publié
 		{% if post.publishedDate %}
-			<br>on {{ post._.publishedDate.format("MMMM Do, YYYY") }}
+			le {{ post._.publishedDate.format("MMMM Do, YYYY") }}
 		{% endif %}
 		{% if post.categories and post.categories.length %}
-			<br>in {% for cat in post.categories %}<a href="/category/{{ cat.key }}">{{ cat.name }}</a>{% if loop.index < post.categories.length %}, {% endif %}{% endfor %}
+			dans {% for cat in post.categories %}<a href="/category/{{ cat.key }}">{{ cat.name }}</a>{% if loop.index < post.categories.length %}, {% endif %}{% endfor %}
 		{% endif %}
 		{% if post.author %}
-			<br>by {{ post.author.name.first }}
+			<br>par {{ post.author.name.first }}
 		{% endif %}
 	</p>
 	{% if post.image.exists %}
@@ -22,7 +22,7 @@
 	<p>{{ post.content.brief|safe }}</p>
 	{% if post.content.extended %}
 		<p class="read-more">
-			<a href="/{{ post.slug }}">Read more...</a>
+			<a href="/{{ post.slug }}">Lire la suite...</a>
 		</p>
 	{% endif %}
 </div>
@@ -30,7 +30,7 @@
 
 {% block intro %}
 <div class="container">
-	{% set title = ( data.category.name if data.category else "Blog" ) %}
+	{% set title = ( data.category.name if data.category else "Toute l'actu" ) %}
 	<h1>{{ title }}</h1>
 </div>
 {% endblock %}
@@ -40,10 +40,10 @@
 	<div class="row">
 		<div class="col-sm-8 col-md-9">
 			{% if filters.category and not data.category %}
-				<h3 class="text-muted">Invalid Category.</h3>
+				<h3 class="text-muted">Categorie invalide.</h3>
 			{% else %}
 				{% if data.posts.results.length %}
-					{% if data.posts.totalPages > 1 %}
+					{#% if data.posts.totalPages > 1 %}
 						<h4 class="text-weight-normal">
 							Showing
 							<strong>{{ data.posts.first }}</strong>
@@ -55,7 +55,7 @@
 						</h4>
 					{% else %}
 						<h4 class="text-weight-normal">Showing {{ utils.plural(data.posts.results.length, "* post") }}.</h4>
-					{% endif %}
+					{% endif %#}
 					<div class="blog">
 						{% for post in data.posts.results %} {{ blogPost(post) }} {% endfor %}
 					</div>
@@ -101,19 +101,19 @@
 					{% endif %}
 				{% else %}
 					{% if data.category %}
-						<h3 class="text-muted">There are no posts in the category {{ data.category.name }}.</h3>
+						<h3 class="text-muted">il n'y a pas encore de contenu dans la catégorie {{ data.category.name }}.</h3>
 					{% else %}
-						<h3 class="text-muted">There are no posts yet.</h3>
+						<h3 class="text-muted">Il n'y a pas encore de contenu ici.</h3>
 					{% endif %}
 				{% endif %}
 			{% endif %}
 		</div>
 		{% if data.categories.length %}
 			<div class="col-sm-4 col-md-3">
-				<h2>Categories</h2>
+				<h2>Catégories</h2>
 				<div class="list-group" style="margin-top: 70px;">
 					{% set class = ( "active" if not data.category else "" ) %}
-					<a href="/" class="{{ class }} list-group-item">All Categories</a>
+					<a href="/" class="{{ class }} list-group-item">Toute l'actu</a>
 					{% for cat in data.categories %} {% set class = ( "active" if data.category and data.category.id == cat.id else "" ) %}
 						<a href="/category/{{ cat.key }}" class="{{ class }} list-group-item">{{ cat.name }}</a>
 					{% endfor %}
